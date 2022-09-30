@@ -1,289 +1,365 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App route should be a function returning a route 1`] = `
-<Route
-  component={[Function]}
->
+<Routes>
   <Route
-    component={[Function]}
+    element={<withClient(UserActionRequired) />}
   >
-    <Redirect
-      from="/"
-      to="balances"
-    />
     <Route
-      path="balances"
-    >
-      <IndexRoute
-        component={[Function]}
-      />
-      <Route
-        component={[Function]}
-        path="details"
-      />
-      <Route
-        component={[Function]}
-        path="future"
-      />
-      <Route
-        component={[Function]}
-        path=":accountOrGroupId/:page"
-      />
-    </Route>
-    <Route
-      path="categories"
-    >
-      <Redirect
-        from="*"
-        to="analysis/categories"
-      />
-    </Route>
-    <Route
-      path="recurrence"
-    >
-      <Redirect
-        from="*"
-        to="analysis/recurrence"
-      />
-    </Route>
-    <Route
-      component={[Function]}
-      path="analysis"
+      element={<withQuery(App) />}
+      path="/"
     >
       <Route
-        path="categories"
+        element={<ScrollToTopOnMountWrapper />}
       >
-        <IndexRoute
-          component={[Function]}
-        />
         <Route
-          component={[Function]}
-          path=":categoryName/:subcategoryName"
-        />
-        <Route
-          component={[Function]}
-          path=":categoryName"
-        />
-      </Route>
-      <Route
-        path="recurrence"
-      >
-        <IndexRoute
-          component={[Function]}
-        />
-        <Route
-          component={[Function]}
-          path=":bundleId"
-        />
-      </Route>
-    </Route>
-    <Route
-      path="settings"
-    >
-      <Route
-        component={[Function]}
-        path="groups/new"
-      />
-      <Route
-        component={[Function]}
-        path="groups/:groupId"
-      />
-      <Redirect
-        from="accounts/:accountId"
-        to="accounts"
-      />
-      <Route
-        component={[Function]}
-      >
-        <IndexRoute
-          component={[Function]}
-        />
-        <Route
-          component={
-            Object {
-              "$$typeof": Symbol(react.memo),
-              "compare": null,
-              "type": [Function],
-            }
+          element={
+            <Navigate
+              replace={true}
+              to="balances"
+            />
           }
-          path="accounts"
+          index={true}
         />
         <Route
-          component={[Function]}
-          path="groups"
+          path="balances"
+        >
+          <Route
+            element={<Memo(Connect(withQuery(withQuery(withQuery(Connect(withClient(withTransactions(Balance)))))))) />}
+            index={true}
+          />
+          <Route
+            element={<Memo(Connect(RawBalanceDetailsPage)) />}
+            path="details"
+          />
+          <Route
+            element={
+              <PlannedTransactionsPage
+                emptyIcon="cozy"
+              />
+            }
+            path="future"
+          />
+          <Route
+            element={<SetFilterAndRedirect />}
+            path=":accountOrGroupId/:page"
+          />
+        </Route>
+        <Route
+          path="categories"
+        >
+          <Route
+            element={
+              <Navigate
+                replace={true}
+                to="analysis/categories"
+              />
+            }
+            path="*"
+          />
+        </Route>
+        <Route
+          path="recurrence"
+        >
+          <Route
+            element={
+              <Navigate
+                replace={true}
+                to="analysis/recurrence"
+              />
+            }
+            path="*"
+          />
+        </Route>
+        <Route
+          element={<AnalysisPage />}
+          path="analysis"
+        >
+          <Route
+            path="categories"
+          >
+            <Route
+              element={<Unknown />}
+              index={true}
+            />
+            <Route
+              element={<Unknown />}
+              path=":categoryName/:subcategoryName"
+            />
+            <Route
+              element={<Unknown />}
+              path=":categoryName"
+            />
+          </Route>
+          <Route
+            path="recurrence"
+          >
+            <Route
+              element={<withError(RecurrencesPage) />}
+              index={true}
+            />
+            <Route
+              element={<RecurrencePage />}
+              path=":bundleId"
+            />
+          </Route>
+        </Route>
+        <Route
+          path="settings"
+        >
+          <Route
+            element={<Memo(NewGroupSettings) />}
+            path="groups/new"
+          />
+          <Route
+            element={<Memo(ExistingGroupSettings) />}
+            path="groups/:groupId"
+          />
+          <Route
+            element={
+              <Navigate
+                replace={true}
+                to="accounts"
+              />
+            }
+            path="accounts/:accountId"
+          />
+          <Route
+            element={
+              <Settings
+                delayContent={0}
+              />
+            }
+          >
+            <Route
+              element={<Unknown />}
+              index={true}
+            />
+            <Route
+              element={<Memo(AccountsSettings) />}
+              path="accounts"
+            />
+            <Route
+              element={<withQuery(withQuery(Groups)) />}
+              path="groups"
+            />
+            <Route
+              element={<Unknown />}
+              path="configuration"
+            />
+          </Route>
+        </Route>
+        <Route
+          element={<Unknown />}
+          path="transfers"
         />
         <Route
-          component={[Function]}
-          path="configuration"
+          element={<SearchPage />}
+          path="search"
+        />
+        <Route
+          element={<SearchPage />}
+          path="search/:search"
+        />
+        <Route
+          element={<DebugRecurrencePage />}
+          path="recurrencedebug"
+        />
+        <Route
+          element={
+            <Navigate
+              replace={true}
+              to="balances"
+            />
+          }
+          path="*"
         />
       </Route>
     </Route>
-    <Route
-      component={[Function]}
-      path="transfers"
-    />
-    <Route
-      component={[Function]}
-      path="search"
-    />
-    <Route
-      component={[Function]}
-      path="search/:search"
-    />
-    <Route
-      component={[Function]}
-      path="recurrencedebug"
-    />
-    <Redirect
-      from="*"
-      to="balances"
-    />
   </Route>
-</Route>
+</Routes>
 `;
 
 exports[`App route should have renderExtraRoutes 1`] = `
-<Route
-  component={[Function]}
->
+<Routes>
   <Route
-    component={[Function]}
+    element={<withClient(UserActionRequired) />}
   >
-    <Redirect
-      from="/"
-      to="balances"
-    />
     <Route
-      path="balances"
-    >
-      <IndexRoute
-        component={[Function]}
-      />
-      <Route
-        component={[Function]}
-        path="details"
-      />
-      <Route
-        component={[Function]}
-        path="future"
-      />
-      <Route
-        component={[Function]}
-        path=":accountOrGroupId/:page"
-      />
-    </Route>
-    <Route
-      path="categories"
-    >
-      <Redirect
-        from="*"
-        to="analysis/categories"
-      />
-    </Route>
-    <Route
-      path="recurrence"
-    >
-      <Redirect
-        from="*"
-        to="analysis/recurrence"
-      />
-    </Route>
-    <Route
-      component={[Function]}
-      path="analysis"
+      element={<withQuery(App) />}
+      path="/"
     >
       <Route
-        path="categories"
+        element={<ScrollToTopOnMountWrapper />}
       >
-        <IndexRoute
-          component={[Function]}
-        />
         <Route
-          component={[Function]}
-          path=":categoryName/:subcategoryName"
-        />
-        <Route
-          component={[Function]}
-          path=":categoryName"
-        />
-      </Route>
-      <Route
-        path="recurrence"
-      >
-        <IndexRoute
-          component={[Function]}
-        />
-        <Route
-          component={[Function]}
-          path=":bundleId"
-        />
-      </Route>
-    </Route>
-    <Route
-      path="settings"
-    >
-      <Route
-        component={[Function]}
-        path="groups/new"
-      />
-      <Route
-        component={[Function]}
-        path="groups/:groupId"
-      />
-      <Redirect
-        from="accounts/:accountId"
-        to="accounts"
-      />
-      <Route
-        component={[Function]}
-      >
-        <IndexRoute
-          component={[Function]}
-        />
-        <Route
-          component={
-            Object {
-              "$$typeof": Symbol(react.memo),
-              "compare": null,
-              "type": [Function],
-            }
+          element={
+            <Navigate
+              replace={true}
+              to="balances"
+            />
           }
-          path="accounts"
+          index={true}
         />
         <Route
-          component={[Function]}
-          path="groups"
+          path="balances"
+        >
+          <Route
+            element={<Memo(Connect(withQuery(withQuery(withQuery(Connect(withClient(withTransactions(Balance)))))))) />}
+            index={true}
+          />
+          <Route
+            element={<Memo(Connect(RawBalanceDetailsPage)) />}
+            path="details"
+          />
+          <Route
+            element={
+              <PlannedTransactionsPage
+                emptyIcon="cozy"
+              />
+            }
+            path="future"
+          />
+          <Route
+            element={<SetFilterAndRedirect />}
+            path=":accountOrGroupId/:page"
+          />
+        </Route>
+        <Route
+          path="categories"
+        >
+          <Route
+            element={
+              <Navigate
+                replace={true}
+                to="analysis/categories"
+              />
+            }
+            path="*"
+          />
+        </Route>
+        <Route
+          path="recurrence"
+        >
+          <Route
+            element={
+              <Navigate
+                replace={true}
+                to="analysis/recurrence"
+              />
+            }
+            path="*"
+          />
+        </Route>
+        <Route
+          element={<AnalysisPage />}
+          path="analysis"
+        >
+          <Route
+            path="categories"
+          >
+            <Route
+              element={<Unknown />}
+              index={true}
+            />
+            <Route
+              element={<Unknown />}
+              path=":categoryName/:subcategoryName"
+            />
+            <Route
+              element={<Unknown />}
+              path=":categoryName"
+            />
+          </Route>
+          <Route
+            path="recurrence"
+          >
+            <Route
+              element={<withError(RecurrencesPage) />}
+              index={true}
+            />
+            <Route
+              element={<RecurrencePage />}
+              path=":bundleId"
+            />
+          </Route>
+        </Route>
+        <Route
+          path="settings"
+        >
+          <Route
+            element={<Memo(NewGroupSettings) />}
+            path="groups/new"
+          />
+          <Route
+            element={<Memo(ExistingGroupSettings) />}
+            path="groups/:groupId"
+          />
+          <Route
+            element={
+              <Navigate
+                replace={true}
+                to="accounts"
+              />
+            }
+            path="accounts/:accountId"
+          />
+          <Route
+            element={
+              <Settings
+                delayContent={0}
+              />
+            }
+          >
+            <Route
+              element={<Unknown />}
+              index={true}
+            />
+            <Route
+              element={<Memo(AccountsSettings) />}
+              path="accounts"
+            />
+            <Route
+              element={<withQuery(withQuery(Groups)) />}
+              path="groups"
+            />
+            <Route
+              element={<Unknown />}
+              path="configuration"
+            />
+          </Route>
+        </Route>
+        <Route
+          element={<Unknown />}
+          path="transfers"
         />
         <Route
-          component={[Function]}
-          path="configuration"
+          element={<SearchPage />}
+          path="search"
+        />
+        <Route
+          element={<SearchPage />}
+          path="search/:search"
+        />
+        <Route
+          element={<DebugRecurrencePage />}
+          path="recurrencedebug"
+        />
+        <Route
+          element={<NewComponent />}
+          path="extra-route"
+        />
+        <Route
+          element={
+            <Navigate
+              replace={true}
+              to="balances"
+            />
+          }
+          path="*"
         />
       </Route>
     </Route>
-    <Route
-      component={[Function]}
-      path="transfers"
-    />
-    <Route
-      component={[Function]}
-      path="search"
-    />
-    <Route
-      component={[Function]}
-      path="search/:search"
-    />
-    <Route
-      component={[Function]}
-      path="recurrencedebug"
-    />
-    <Route
-      component={[Function]}
-      path="extra-route"
-    />
-    <Redirect
-      from="*"
-      to="balances"
-    />
   </Route>
-</Route>
+</Routes>
 `;

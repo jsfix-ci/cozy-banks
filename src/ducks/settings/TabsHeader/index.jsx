@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import flag from 'cozy-flags'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -9,7 +10,6 @@ import Padded from 'components/Padded'
 import Header from 'components/Header'
 import { Tab, Tabs } from 'cozy-ui/transpiled/react/MuiTabs'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
-import { useLocation, useHistory } from 'components/RouterContext'
 
 export const tabNames = ['configuration', 'accounts', 'groups']
 
@@ -21,12 +21,12 @@ const TabsHeader = () => {
   const { isMobile } = useBreakpoints()
   const { t } = useI18n()
   const location = useLocation()
-  const history = useHistory()
+  const navigate = useNavigate()
   let defaultTab = location.pathname.replace('/settings/', '')
 
   if (tabNames.indexOf(defaultTab) === -1) defaultTab = 'configuration'
 
-  const goTo = useCallback(url => () => history.push(url), [history])
+  const goTo = useCallback(url => () => navigate(url), [navigate])
 
   return (
     <>

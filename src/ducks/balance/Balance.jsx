@@ -8,7 +8,6 @@ import isEqual from 'lodash/isEqual'
 
 import React, { PureComponent, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router'
 import { createStructuredSelector } from 'reselect'
 import cx from 'classnames'
 
@@ -136,9 +135,9 @@ class Balance extends PureComponent {
   }
 
   handleClickBalance() {
-    const { router, filterByAccounts } = this.props
+    const { navigate, filterByAccounts } = this.props
     filterByAccounts(this.getCheckedAccounts())
-    router.push('/balances/details')
+    navigate('/balances/details')
   }
 
   savePanelState() {
@@ -255,9 +254,9 @@ class Balance extends PureComponent {
       checkedAccounts.length === accounts.length
         ? undefined
         : {
-          nbCheckedAccounts: checkedAccounts.length,
-          nbAccounts: accounts.length
-        }
+            nbCheckedAccounts: checkedAccounts.length,
+            nbAccounts: accounts.length
+          }
 
     return (
       <Fragment>
@@ -304,13 +303,13 @@ const addTransactions = Component => {
     const transactions = useFullyLoadedQuery(conn.query, conn)
     return <Component {...props} transactions={transactions} />
   }
-  Wrapped.displayName = `withTransactions(${Component.displayName || Component.name
-    })`
+  Wrapped.displayName = `withTransactions(${
+    Component.displayName || Component.name
+  })`
   return Wrapped
 }
 
 export default compose(
-  withRouter,
   connect(null, actionCreators),
   queryConnect({
     accounts: accountsConn,

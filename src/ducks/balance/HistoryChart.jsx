@@ -1,6 +1,5 @@
 import React, { useRef, useCallback, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router'
 import cx from 'classnames'
 import * as d3 from 'utils/d3'
 import compose from 'lodash/flowRight'
@@ -81,7 +80,6 @@ const HistoryChart = props => {
 const EnhancedHistoryChart = HistoryChart
 
 export const ConnectedHistoryChart = compose(
-  withRouter,
   connect((state, ownProps) => ({
     data: getChartData(state, ownProps)
   }))

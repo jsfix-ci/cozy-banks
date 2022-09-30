@@ -1,6 +1,5 @@
 import compose from 'lodash/flowRight'
 import React, { Component } from 'react'
-import { withRouter } from 'react-router'
 import cx from 'classnames'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
@@ -76,9 +75,9 @@ class Categories extends Component {
   }
 
   handleClick = (category, subcategory) => {
-    const { router } = this.props
+    const { navigate } = this.props
     if (subcategory) {
-      router.push(`/analysis/categories/${category.name}/${subcategory.name}`)
+      navigate(`/analysis/categories/${category.name}/${subcategory.name}`)
     } else {
       this.toggle(category.name)
     }
@@ -262,4 +261,4 @@ class Categories extends Component {
   }
 }
 
-export default compose(withRouter, withBreakpoints(), translate())(Categories)
+export default compose(withBreakpoints(), translate())(Categories)

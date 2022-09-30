@@ -2,6 +2,7 @@
 
 import React, { useMemo } from 'react'
 import { Provider } from 'react-redux'
+import { HashRouter } from 'react-router-dom'
 
 import { WebviewIntentProvider } from 'cozy-intent'
 import I18n, { initTranslation } from 'cozy-ui/transpiled/react/I18n'
@@ -15,10 +16,12 @@ import {
 
 import flag from 'cozy-flags'
 
+import { MobileRouter } from 'ducks/mobile/MobileRouter'
 import { TrackerProvider } from 'ducks/tracking/browser'
 import JobsProvider from 'ducks/context/JobsContext'
 import BanksProvider from 'ducks/context/BanksContext'
 import SelectionProvider from 'ducks/context/SelectionContext'
+import AppRoute from 'components/AppRoute'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import cozyBar from 'utils/cozyBar'
 import {
@@ -52,13 +55,7 @@ const generateClassName = createGenerateClassName({
   productionPrefix: 'c'
 })
 
-const AppContainer = ({ store, lang, history, client }) => {
-  const AppRoute = require('components/AppRoute').default
-  const Router =
-    __TARGET__ === 'mobile' || flag('authentication')
-      ? require('ducks/mobile/MobileRouter').default
-      : require('react-router').Router
-
+const AppContainer = ({ store, lang, client }) => {
   const dictRequire = lang => require(`locales/${lang}`)
   const { t } = useMemo(() => {
     return initT(lang, dictRequire)
@@ -87,7 +84,14 @@ const AppContainer = ({ store, lang, history, client }) => {
                             <RealTimeQueries doctype={ACCOUNT_DOCTYPE} />
                             <RealTimeQueries doctype={TRANSACTION_DOCTYPE} />
                             <RealTimeQueries doctype={GROUP_DOCTYPE} />
-                            <Router history={history} routes={AppRoute()} />
+                            {__TARGET__ === 'mobile' ||
+                            flag('authentication') ? (
+                              <MobileRouter routes={<AppRoute />} />
+                            ) : (
+                              <HashRouter>
+                                <AppRoute />
+                              </HashRouter>
+                            )}
                           </MuiCozyTheme>
                         </StoreURLProvider>
                       </SelectionProvider>
